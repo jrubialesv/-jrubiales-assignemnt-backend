@@ -8,6 +8,7 @@ class Recipes(db.Model):
     rate = db.Column(db.Float, nullable=False)
     favorite = db.Column(db.Boolean, nullable=False, default=False)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    status = db.Column(db.String(32), nullable=False)
 
     def __repr__(self):
         return '<Event %r>' % self.id
@@ -16,3 +17,5 @@ class Recipes(db.Model):
         self.name = name
         self.rate = 0
         self.favorite = False
+        self.status = 'active'
+        self.created_at = datetime.utcnow()

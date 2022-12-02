@@ -1,6 +1,6 @@
 from flask import Flask, request
-from iebank_api import db, app
-from iebank_api.models import Account
+from recipes_api import db, app
+from recipes_api.models import Recipes
 
 
 @app.route('/')
@@ -12,46 +12,48 @@ def skull():
     return 'Hi! This is the BACKEND SKULL! 💀'
 
 
-@app.route('/accounts', methods=['POST'])
+@app.route('/recipes', methods=['POST'])
 def create_account():
     name = request.json['name']
-    currency = request.json['currency']
-    account = Account(name, currency)
-    db.session.add(account)
+    rate = request.json['rate']
+    favorite = request.json['favorite']
+    status = request.json['status']
+
+    new_recipe = Recipes(name, rate, favorite)
+    db.session.add(new_recipe)
     db.session.commit()
-    return format_account(account)
+    return format_recipe(new_recipe)
 
-@app.route('/accounts', methods=['GET'])
-def get_accounts():
-    accounts = Account.query.all()
-    return {'accounts': [format_account(account) for account in accounts]}
+@app.route('/recipes', methods=['GET'])
+def get_recipes():
+    recipes = Recipes.query.all()
+    return {'recipes': [format_recipe(recipe) for recipe in recipes]}
 
-@app.route('/accounts/<int:id>', methods=['GET'])
-def get_account(id):
-    account = Account.query.get(id)
-    return format_account(account)
+@app.route('/recipes/<int:id>', methods=['GET'])
+def get_recipe(id):
+    account = Recipes.query.get(id)
+    return format_recipe(account)
 
-@app.route('/accounts/<int:id>', methods=['PUT'])
-def update_account(id):
-    account = Account.query.get(id)
-    account.name = request.json['name']
+@app.route('/recipes/<int:id>', methods=['PUT'])
+def update_recipe(id):
+    recipe = Recipes.query.get(id)
+    recipe.name = request.json['name']
     db.session.commit()
-    return format_account(account)
+    return format_recipe(recipe)
 
-@app.route('/accounts/<int:id>', methods=['DELETE'])
-def delete_account(id):
-    account = Account.query.get(id)
-    db.session.delete(account)
+@app.route('/recipes/<int:id>', methods=['DELETE'])
+def delete_recipe(id):
+    recipe = Recipes.query.get(id)
+    db.session.delete(recipe)
     db.session.commit()
-    return format_account(account)
+    return format_recipe(recipe)
 
-def format_account(account):
+def format_recipe(account):
     return {
         'id': account.id,
         'name': account.name,
-        'account_number': account.account_number,
-        'balance': account.balance,
-        'currency': account.currency,
-        'status': account.status,
-        'created_at': account.created_at
+        'rate': account.rate,
+        'favorite': account.favorite,
+        'created_at': account.created_at,
+        'status': account.status
     }
