@@ -16,8 +16,8 @@ else:
     app.config.from_object('config.DevelopmentConfig')
 db = SQLAlchemy(app)
 
-from iebank_api.models import Account
+from recipes_api.models import Recipes
 db.create_all()
 CORS(app)
 
-from iebank_api import routes
+from recipes_api import routes

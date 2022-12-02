@@ -1,15 +1,13 @@
-from iebank_api.models import Account
+from recipes_api.models import Recipes
 import pytest
 
-def test_create_account():
+def test_create_recipes():
     """
-    GIVEN a Account model
-    WHEN a new Account is created
-    THEN check the name, account_number, balance, currency, status and created_at fields are defined correctly
+    GIVEN a Recipes model
+    WHEN a new Recipe is created
+    THEN check the name, 
     """
-    account = Account('test', '€')
+    account = Recipes('test', 3, False)
     assert account.name == 'test'
-    assert account.currency == '€'
-    assert account.account_number != None
-    assert account.balance == 0.0
-    assert account.status == 'Active'
+    assert account.rate == 3    
+    assert account.favorite == False
