@@ -1,4 +1,4 @@
-name: IEbank backend CICD
+name: Assignment backend CICD
 
 on:
   push:
@@ -43,7 +43,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
-        python -m pytest --cov=iebank_api -v
+        python -m pytest --cov=recipes_api -v
     - name: Upload artifact for deployment jobs
       uses: actions/upload-artifact@v2
       with:
@@ -72,5 +72,5 @@ jobs:
       uses: azure/webapps-deploy@v2
       id: deploy-to-webapp
       with:
-        app-name: 'jseijas-iebank-backend'
+        app-name: 'jrubiales-assignment-backend'
         slot-name: 'Production'
