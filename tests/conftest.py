@@ -5,7 +5,7 @@ from recipes_api import db, app
 
 @pytest.fixture
 def testing_client(scope='module'):
-    app.app_context().push()
+    # app.app_context().push()
     db.create_all()
     account = Recipes('Test Account', 4, False, 'active')
     db.session.add(account)
@@ -15,5 +15,4 @@ def testing_client(scope='module'):
         yield testing_client
 
     db.drop_all()
-    app.app_context().pop() 
-        
+  
