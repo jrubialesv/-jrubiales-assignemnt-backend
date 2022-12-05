@@ -13,14 +13,7 @@ def testing_client(scope='module'):
 
     with app.test_client() as testing_client:
         yield testing_client
-<<<<<<< HEAD
-        
+
     db.drop_all()
     app.app_context().pop() 
-          
-
-    
-=======
-
-    db.drop_all()
->>>>>>> 306cb88c730a326a788116c7a0d9adb81f072f19
+        
