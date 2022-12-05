@@ -13,13 +13,13 @@ def skull():
 
 
 @app.route('/recipes', methods=['POST'])
-def create_account():
+def create_recipe():
     name = request.json['name']
     rate = request.json['rate']
     favorite = request.json['favorite']
     status = request.json['status']
 
-    new_recipe = Recipes(name, rate, favorite)
+    new_recipe = Recipes(name, rate, favorite, status)
     db.session.add(new_recipe)
     db.session.commit()
     return format_recipe(new_recipe)
@@ -31,8 +31,8 @@ def get_recipes():
 
 @app.route('/recipes/<int:id>', methods=['GET'])
 def get_recipe(id):
-    account = Recipes.query.get(id)
-    return format_recipe(account)
+    recipe = Recipes.query.get(id)
+    return format_recipe(recipe)
 
 @app.route('/recipes/<int:id>', methods=['PUT'])
 def update_recipe(id):
@@ -48,12 +48,12 @@ def delete_recipe(id):
     db.session.commit()
     return format_recipe(recipe)
 
-def format_recipe(account):
+def format_recipe(recipe):
     return {
-        'id': account.id,
-        'name': account.name,
-        'rate': account.rate,
-        'favorite': account.favorite,
-        'created_at': account.created_at,
-        'status': account.status
+        'id': recipe.id,
+        'name': recipe.name,
+        'rate': recipe.rate,
+        'favorite': recipe.favorite,
+        'created_at': recipe.created_at,
+        'status': recipe.status
     }

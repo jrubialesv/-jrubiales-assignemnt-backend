@@ -13,9 +13,9 @@ class Recipes(db.Model):
     def __repr__(self):
         return '<Event %r>' % self.id
 
-    def __init__(self, name, rate, favorite):
+    def __init__(self, name, rate, favorite, status):
         self.name = name
-        self.rate = 0
-        self.favorite = False
-        self.status = 'active'
+        self.rate = rate
+        self.favorite = favorite
+        self.status = status
         self.created_at = datetime.utcnow()

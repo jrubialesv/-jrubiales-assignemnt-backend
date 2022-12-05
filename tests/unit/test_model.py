@@ -7,7 +7,7 @@ def test_create_recipes():
     WHEN a new Recipe is created
     THEN check the name, 
     """
-    account = Recipes('test', 3, False)
-    assert account.name == 'test'
-    assert account.rate == 3    
-    assert account.favorite == False
+    recipe = Recipes('test', 3, False)
+    assert recipe.name == 'test'
+    assert recipe.rate == 3    
+    assert recipe.favorite == False
