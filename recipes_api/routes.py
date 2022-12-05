@@ -11,14 +11,16 @@ def hello_world():
 def skull():
     return 'Hi! This is the BACKEND SKULL! 💀'
 
-
 @app.route('/recipes', methods=['POST'])
 def create_recipe():
     name = request.json['name']
     rate = request.json['rate']
     favorite = request.json['favorite']
     status = request.json['status']
+<<<<<<< HEAD
 
+=======
+>>>>>>> 306cb88c730a326a788116c7a0d9adb81f072f19
     new_recipe = Recipes(name, rate, favorite, status)
     db.session.add(new_recipe)
     db.session.commit()
@@ -54,6 +56,11 @@ def format_recipe(recipe):
         'name': recipe.name,
         'rate': recipe.rate,
         'favorite': recipe.favorite,
+<<<<<<< HEAD
         'created_at': recipe.created_at,
         'status': recipe.status
+=======
+        'status': recipe.status,
+        'created_at': recipe.created_at
+>>>>>>> 306cb88c730a326a788116c7a0d9adb81f072f19
     }
