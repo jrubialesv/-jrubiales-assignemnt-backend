@@ -8,7 +8,6 @@ on:
   workflow_dispatch:
 
 
-
 permissions:
   contents: read
   id-token: write
@@ -73,9 +72,9 @@ jobs:
         app-name: 'jseijas-app-dev-bicep’
         slot-name: 'Production'
 
-  deploy:
+  deploy-prod:
     runs-on: ubuntu-latest
-    needs: build
+    needs: deploy-dev
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
