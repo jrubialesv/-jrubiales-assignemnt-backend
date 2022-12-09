@@ -69,7 +69,7 @@ jobs:
       uses: azure/webapps-deploy@v2
       id: deploy-to-webapp
       with:
-        app-name: 'jseijas-app-dev-bicep’
+        app-name: 'jrubiales-assignment-backend-dev’
         slot-name: 'Production'
 
   deploy-prod:
@@ -94,5 +94,5 @@ jobs:
       uses: azure/webapps-deploy@v2
       id: deploy-to-webapp
       with:
-        app-name: 'jrubiales-app-prod-bicep'
+        app-name: 'jrubiales-assignment-backend-prod'
         slot-name: 'Production'
