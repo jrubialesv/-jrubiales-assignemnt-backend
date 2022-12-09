@@ -1,11 +1,12 @@
-name: Assignment backend CICD
+name: Cook Backend
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "dev" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", "dev" ]
   workflow_dispatch:
+
 
 
 permissions:
@@ -17,12 +18,11 @@ jobs:
     
     runs-on: ubuntu-latest
     env:
-      ENV: ghci
-      DBHOST: bla
-      DBUSER: bla
-      DBPASS: bla
-      DBNAME: bla
-
+      ENV: dev
+      DBUSER: postgres@jseijas-dbsrv.postgres.database.azure.com
+      DBPASS: Pa$$w0rd1990
+      DBHOST: jseijas-dbsrv.postgres.database.azure.com
+      DBNAME: jrubiales-assignment-prod-db
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python 3.10
@@ -42,42 +42,23 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
-        python -m pytest --cov=recipes_api -v
+        python -m pytest --cov=cook_api -v
     - name: Upload artifact for deployment jobs
       uses: actions/upload-artifact@v2
       with:
         name: python-app
         path: |
-          
-  
-  deploy-dev:
+          . 
+  deploy-prod:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     needs: build
-    environment:
-      name: 'Development'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-
-    steps:
-    - name: Download artifact from build job
-      uses: actions/download-artifact@v2
-      with:
-        name: python-app
-        path: .
-    
-    - uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
-
-    - name: 'Deploy to Azure Web App'
-      uses: azure/webapps-deploy@v2
-      id: deploy-to-webapp
-      with:
-        app-name: 'jrubiales-assignment-backend-dev'
-        slot-name: 'Production'
-
-  deploy-prod:
-    runs-on: ubuntu-latest
-    needs: deploy-dev
+    env:
+      ENV: prod
+      DBUSER: postgres@jseijas-dbsrv.postgres.database.azure.com
+      DBPASS: Pa$$w0rd1990
+      DBHOST: jseijas-dbsrv.postgres.database.azure.com
+      DBNAME: jrubiales-assignment-prod-db
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
@@ -98,4 +79,34 @@ jobs:
       id: deploy-to-webapp
       with:
         app-name: 'jrubiales-assignment-backend-prod'
-        slot-name: 'Production'
+
+  deploy-dev:
+    if: github.ref == 'refs/heads/dev'
+    runs-on: ubuntu-latest
+    needs: build
+    env:
+      ENV: dev
+      DBUSER: postgres@jseijas-dbsrv.postgres.database.azure.com
+      DBPASS: Pa$$w0rd1990
+      DBHOST: jseijas-dbsrv.postgres.database.azure.com
+      DBNAME: jrubiales-assignment-dev-db
+    environment:
+      name: 'Development'
+      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
+    steps:
+    - name: Download artifact from build job
+      uses: actions/download-artifact@v2
+      with:
+        name: python-app
+        path: .
+    
+    - uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: 'Deploy to Azure Web App'
+      uses: azure/webapps-deploy@v2
+      id: deploy-to-webapp
+      with:
+        app-name: 'jrubiales-assignment-backend-dev'
