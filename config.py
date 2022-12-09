@@ -4,7 +4,7 @@ import os
 load_dotenv()
 
 class Config(object):
-    SECRET_KEY = '3080'
+    SECRET_KEY = 'Pa$$w0rd1990'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     
 print(os.getenv('DBHOST'))
