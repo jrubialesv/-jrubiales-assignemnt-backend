@@ -56,6 +56,7 @@ jobs:
     environment:
       name: 'Development'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
+
     steps:
       - name: Download artifact from build job
       uses: actions/download-artifact@v2
@@ -64,12 +65,12 @@ jobs:
         path: .
     - uses: azure/login@v1
     with:
-    creds: ${{ secrets.AZURE_CREDENTIALS }}
-      - name: 'Deploy to Azure Web App'
+      creds: ${{ secrets.AZURE_CREDENTIALS }}
+    - name: 'Deploy to Azure Web App'
       uses: azure/webapps-deploy@v2
       id: deploy-to-webapp
       with:
-        app-name: 'jrubiales-assignment-backend-dev’
+        app-name: 'jrubiales-assignment-backend-dev'
         slot-name: 'Production'
 
   deploy-prod:
