@@ -18,7 +18,7 @@ jobs:
     
     runs-on: ubuntu-latest
     env:
-      ENV: ghci
+      ENV: production
       DBHOST: ${{ secrets.DBHOST }}
       DBUSER:   ${{ secrets.DBUSER }}
       DBPASS:   ${{ secrets.DBPASS }}
