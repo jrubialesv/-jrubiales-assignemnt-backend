@@ -18,11 +18,11 @@ jobs:
     
     runs-on: ubuntu-latest
     env:
-      ENV: production
-      DBHOST: ${{ secrets.DBHOST }}
-      DBUSER:   ${{ secrets.DBUSER }}
-      DBPASS:   ${{ secrets.DBPASS }}
-      DBNAME:  ${{ secrets.DBNAME }}
+      ENV: ghci
+      DBHOST: bla
+      DBUSER: bla
+      DBPASS: bla
+      DBNAME: bla
 
     steps:
     - uses: actions/checkout@v3
