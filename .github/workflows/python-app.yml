@@ -48,7 +48,7 @@ jobs:
       with:
         name: python-app
         path: |
-          . 
+          
   
   deploy-dev:
     runs-on: ubuntu-latest
