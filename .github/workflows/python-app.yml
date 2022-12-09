@@ -1,4 +1,4 @@
-name: Cook Backend
+name: Recipes backend
 
 on:
   push:
@@ -42,7 +42,7 @@ jobs:
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
     - name: Test with pytest
       run: |
-        python -m pytest --cov=recipes_api -v
+        python -m pytest -v
     - name: Upload artifact for deployment jobs
       uses: actions/upload-artifact@v2
       with:
