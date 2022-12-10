@@ -58,7 +58,7 @@ jobs:
       DBUSER: postgres@jseijas-dbsrv.postgres.database.azure.com
       DBPASS: Pa$$w0rd1990
       DBHOST: jseijas-dbsrv.postgres.database.azure.com
-      DBNAME: jrubiales-assignment-prod-db
+      DBNAME: jrubiales-assignment-dev-db
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
