@@ -26,7 +26,7 @@ def test_create_recipes(testing_client):
     WHEN the '/recipes' page is posted to (POST)
     THEN check the response is valid
     """
-    response = testing_client.post('/recipes', json={'name': 'test', 'rate': '3', 'favorite': False, 'status': 'active'})
+    response = testing_client.post('/recipes', json={'name': 'test', 'ingredients': 'test', 'steps': 'test', 'rate': 3, 'favorite': False})
     assert response.status_code == 200
 
 def test_get_recipes(testing_client):
@@ -44,7 +44,7 @@ def test_update_recipes(testing_client):
     WHEN the '/recipes/<int:id>' page is updated (PUT)
     THEN check the response is valid
     """
-    response = testing_client.put('/recipes/1', json={'name': 'test', 'rate': '3', 'favorite': False, 'status': 'active'})
+    response = testing_client.put('/recipes/1', json={'name': 'test', 'ingredients': 'test', 'steps': 'test', 'rate': 3, 'favorite': False})
     assert response.status_code == 200
 
 def test_delete_recipes(testing_client):
@@ -62,5 +62,5 @@ def test_main_post(testing_client):
     WHEN the '/' page is sent to (POST)
     THEN check the response is not valid
     """
-    response = testing_client.post('/', json={'name': 'test', 'rate': '3', 'favorite': False, 'status': 'active'})
+    response = testing_client.post('/', json={'name': 'test', 'ingredients': 'test', 'steps': 'test', 'rate': 3, 'favorite': False})
     assert response.status_code == 405

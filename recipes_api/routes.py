@@ -14,10 +14,11 @@ def skull():
 @app.route('/recipes', methods=['POST'])
 def create_recipe():
     name = request.json['name']
+    ingredients = request.json['ingredients']
+    steps = request.json['steps']
     rate = request.json['rate']
     favorite = request.json['favorite']
-    status = request.json['status']
-    new_recipe = Recipes(name, rate, favorite, status)
+    new_recipe = Recipes(name, ingredients, steps, rate, favorite)
     db.session.add(new_recipe)
     db.session.commit()
     return format_recipe(new_recipe)
@@ -36,10 +37,10 @@ def get_recipe(id):
 def update_recipe(id):
     recipe = Recipes.query.get(id)
     recipe.name = request.json['name']
+    recipe.ingredients = request.json['ingredients']
+    recipe.steps = request.json['steps']
     recipe.rate = request.json['rate']
-    recipe.favorite = request.json['favorite']
-    recipe.status = request.json['status']
-    
+    recipe.favorite = request.json['favorite']    
 
     db.session.commit()
     return format_recipe(recipe)
@@ -55,8 +56,9 @@ def format_recipe(recipe):
     return {
         'id': recipe.id,
         'name': recipe.name,
+        'ingredients': recipe.ingredients,
+        'steps': recipe.steps,
         'rate': recipe.rate,
         'favorite': recipe.favorite,
-        'status': recipe.status,
         'created_at': recipe.created_at
     }

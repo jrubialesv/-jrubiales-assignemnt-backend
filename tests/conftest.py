@@ -8,7 +8,7 @@ def testing_client(scope='module'):
     
     
     db.create_all()
-    account = Recipes('Test Account', 4, False, 'active')
+    account = Recipes('Test Account', 'test', 'test', 3, False)
     db.session.add(account)
     db.session.commit()
 
