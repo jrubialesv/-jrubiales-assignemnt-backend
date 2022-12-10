@@ -18,7 +18,7 @@ jobs:
     
     runs-on: ubuntu-latest
     env:
-      ENV: dev
+      ENV: devs
       DBUSER: postgres@jseijas-dbsrv.postgres.database.azure.com
       DBPASS: Pa$$w0rd1990
       DBHOST: jseijas-dbsrv.postgres.database.azure.com
