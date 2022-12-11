@@ -78,7 +78,7 @@ jobs:
       uses: azure/webapps-deploy@v2 
       id: deploy-to-webapp
       with:
-        app-name: 'jrubiales-assignment-backend-prod'
+        app-name: 'jrubiales-assignment-be-prod'
 
   deploy-dev:
     if: github.ref == 'refs/heads/dev'
@@ -109,4 +109,4 @@ jobs:
       uses: azure/webapps-deploy@v2
       id: deploy-to-webapp
       with:
-        app-name: 'jrubiales-assignment-backend-dev'
+        app-name: 'jrubiales-assignment-be-dev'
