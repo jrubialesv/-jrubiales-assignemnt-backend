@@ -19,10 +19,10 @@ jobs:
     runs-on: ubuntu-latest
     env:
       ENV: devs
-      DBUSER: ${{ secrets.DBUSER }} 
-      DBPASS: ${{ secrets.DBPASS }}
-      DBHOST: ${{ secrets.DBHOST }} 
-      DBNAME: ${{ secrets.DBNAME }}
+      DBUSER: postgres@jseijas-dbsrv.postgres.database.azure.com
+      DBPASS: Pa$$w0rd1990
+      DBHOST: jseijas-dbsrv.postgres.database.azure.com
+      DBNAME: jrubiales-assignment-dev-db
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python 3.10
