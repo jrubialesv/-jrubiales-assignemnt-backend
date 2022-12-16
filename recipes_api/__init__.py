@@ -8,7 +8,6 @@ app = Flask(__name__)
 
 load_dotenv()
 # Select environment based on the ENV environment variable
-
 if os.getenv('ENV') != 'dev':
     print("Running in production mode")
     app.config.from_object('config.ProductionConfig')
@@ -23,4 +22,3 @@ from recipes_api import routes
 
 db.create_all()
 CORS(app)
-

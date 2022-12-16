@@ -15,12 +15,15 @@ jobs:
   build:
     
     runs-on: ubuntu-latest
+
+    
+
     env:
-      ENV: dev
+      ENV: devs
       DBUSER: postgres@jseijas-dbsrv.postgres.database.azure.com
       DBPASS: Pa$$w0rd1990
       DBHOST: jseijas-dbsrv.postgres.database.azure.com
-      DBNAME: jrubiales-assignment-prod-db
+      DBNAME: jrubiales-assignment-dev-db
     steps:
     - uses: actions/checkout@v3
     - name: Set up Python 3.10
@@ -53,10 +56,10 @@ jobs:
     needs: build
     env:
       ENV: prod
-      DBUSER: postgres@jseijas-dbsrv.postgres.database.azure.com
-      DBPASS: Pa$$w0rd1990
-      DBHOST: jseijas-dbsrv.postgres.database.azure.com
-      DBNAME: jrubiales-assignment-prod-db
+      DBUSER: ${{ secrets.DBUSER }}
+      DBPASS: ${{ secrets.DBPASS }}
+      DBHOST: ${{ secrets.DBHOST }}
+      DBNAME: ${{ secrets.DBNAME }}
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
@@ -76,7 +79,7 @@ jobs:
       uses: azure/webapps-deploy@v2 
       id: deploy-to-webapp
       with:
-        app-name: 'jrubiales-assignment-backend-prod'
+        app-name: 'jrubiales-assignment-be-prod'
 
   deploy-dev:
     if: github.ref == 'refs/heads/dev'
@@ -84,10 +87,10 @@ jobs:
     needs: build
     env:
       ENV: dev
-      DBUSER: postgres@jseijas-dbsrv.postgres.database.azure.com
-      DBPASS: Pa$$w0rd1990
-      DBHOST: jseijas-dbsrv.postgres.database.azure.com
-      DBNAME: jrubiales-assignment-dev-db
+      DBUSER: ${{ secrets.DBUSER }}
+      DBPASS: ${{ secrets.DBPASS }}
+      DBHOST: ${{ secrets.DBHOST }}
+      DBNAME: ${{ secrets.DBNAME }}
     environment:
       name: 'Development'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
@@ -107,4 +110,5 @@ jobs:
       uses: azure/webapps-deploy@v2
       id: deploy-to-webapp
       with:
-        app-name: 'jrubiales-assignment-backend-dev'
+        app-name: 'jrubiales-assignment-be-dev'
+
