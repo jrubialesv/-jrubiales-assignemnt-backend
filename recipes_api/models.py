@@ -21,3 +21,4 @@ class Recipes(db.Model):
         self.rate = rate
         self.favorite = favorite
         self.created_at = datetime.utcnow()
+
