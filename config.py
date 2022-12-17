@@ -7,7 +7,7 @@ class Config(object):
     SECRET_KEY = 'Julioapruebameporfavor'
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     
-print(os.getenv('DBHOST'))
+print(os.getenv('DBNAME'))
 class ProductionConfig(Config):
     SQLALCHEMY_DATABASE_URI = 'postgresql://{dbuser}:{dbpass}@{dbhost}/{dbname}'.format(
     dbuser=os.getenv('DBUSER'),
