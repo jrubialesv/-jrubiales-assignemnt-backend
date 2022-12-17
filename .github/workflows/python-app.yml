@@ -7,8 +7,6 @@ on:
     branches: [ "main", "dev" ]
   workflow_dispatch:
 
-
-
 permissions:
   contents: read
   id-token: write
@@ -17,6 +15,9 @@ jobs:
   build:
     
     runs-on: ubuntu-latest
+
+    
+
     env:
       ENV: dev
       DBUSER: postgres@jseijas-dbsrv.postgres.database.azure.com
