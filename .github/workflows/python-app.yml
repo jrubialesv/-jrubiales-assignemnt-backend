@@ -55,7 +55,7 @@ jobs:
       DBUSER: ${{ secrets.DBUSER }}
       DBPASS: ${{ secrets.DBPASS }}
       DBHOST: ${{ secrets.DBHOST }}
-      DBNAME: ${{ secrets.DBNAME }}
+      DBNAME: ${{ secrets.DBNAMEDEV }}
     environment:
       name: 'Development'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
@@ -86,7 +86,7 @@ jobs:
       DBUSER: ${{ secrets.DBUSER }}
       DBPASS: ${{ secrets.DBPASS }}
       DBHOST: ${{ secrets.DBHOST }}
-      DBNAME: ${{ secrets.DBNAME }}
+      DBNAME: ${{ secrets.DBNAMEPROD }}
     environment:
       name: 'Production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
